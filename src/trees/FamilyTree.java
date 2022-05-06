@@ -49,7 +49,7 @@ public class FamilyTree
             // No, recurse. Check all children of this node.
             if (this.contains(targetName))
             {
-            	return this.find(targetName);
+            	return findRecursive(targetName, this);
             }
             
             // Not found anywhere.
@@ -165,7 +165,7 @@ public class FamilyTree
 		int colonIndex = line.indexOf(":"); //should be the index of the colon in line.
 		if (colonIndex < 0)
 		{
-			throw new TreeException("File is empty");
+			throw new TreeException("File is corrupt");
 		}
 		//throw a TreeException with a useful message
 					
@@ -173,7 +173,7 @@ public class FamilyTree
 		//The substring of line that starts at char #0 and ends just before colonIndex. Check the API for 
 		//class java.util.String, method substring(), if you need guidance.
 		
-		String childrenString = line.substring(colonIndex); 
+		String childrenString = line.substring(colonIndex + 1); 
 		//The substring of line that starts just after colonIndex and goes through the end of
 		//the line. You'll use a different version of substring().
 		
